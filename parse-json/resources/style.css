@@ -1,0 +1,17 @@
+.noBorder {
+  border: none !important;
+  box-shadow: none !important;
+}
+.reveal pre code {
+  max-height: none !important;
+}
+.reveal pre {
+  width: 100% !important;
+}
+.fragment.highlight-halffade {
+  opacity: 0.15 !important;
+  visibility: visible !important;
+}
+.fragment.highlight-halffade.visible {
+  opacity: 1 !important;
+}

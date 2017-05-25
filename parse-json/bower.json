@@ -1,0 +1,13 @@
+{
+  "name": "json-parser",
+  "private": true,
+  "dependencies": {
+    "purescript-enums": "^3.0.0",
+    "purescript-parsing": "^4.2.1",
+    "purescript-generics-rep": "^5.0.0",
+    "purescript-maps": "^3.0.0"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^3.0.0"
+  }
+}
