@@ -12,3 +12,9 @@ $ npm run slides
 
 * [pdf][slides.pdf]
 * video TK
+
+JSON parser related links:
+
+* https://gist.github.com/zearen-wover/1692518
+* https://hackage.haskell.org/package/json-0.9.1/docs/src/Text-JSON-Parsec.html
+* https://fsharpforfunandprofit.com/posts/understanding-parser-combinators-4/
