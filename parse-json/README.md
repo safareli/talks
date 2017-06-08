@@ -10,7 +10,7 @@ $ npm run slides
 
 ---
 
-* [pdf][slides.pdf]
+* [PDF](slides.pdf)
 * video TK
 
 JSON parser related links:
