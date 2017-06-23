@@ -40,7 +40,7 @@ data Parser a = Parser
   (String → Tuple (Either ParserError a) String)
 
 ﹇
-run ∷ ∀ a. String → Parser a → Either ParserError a
+run ∷ String → Parser a → Either ParserError a
 ⎵
 ```
 
@@ -89,7 +89,7 @@ eof ∷ Parser Unit
 -===-
 
 ```haskell
-pure ∷ ∀ a . a → Parser a
+pure ∷ a → Parser a
 
 ﹇
 > run "Whatever dude" (pure 1)
@@ -127,7 +127,7 @@ string ∷ String → Parser String
 -===-
 
 ```haskell
-$> ∷ ∀ a b . Parser a → b → Parser b
+$> ∷ Parser a → b → Parser b
 
 ﹇
 > run "0" ((P.char '0') $> 0)
@@ -143,8 +143,8 @@ $> ∷ ∀ a b . Parser a → b → Parser b
 -===-
 
 ```haskell
-*> ∷ ∀ a b . Parser a → Parser b → Parser b
-<* ∷ ∀ a b . Parser a → Parser b → Parser a
+*> ∷ Parser a → Parser b → Parser b
+<* ∷ Parser a → Parser b → Parser a
 
 ﹇
 > run "01" ((P.char '0') *> (P.char '1'))
@@ -263,7 +263,7 @@ jNull = (tok (P.string "null")) $> JNull
 -===-
 
 ```haskell
-choice ∷ ∀ a . Array (Parser a) → Parser a
+choice ∷ Array (Parser a) → Parser a
 
 ﹇
 > run "1" (P.choice [zero, one])
@@ -279,7 +279,7 @@ choice ∷ ∀ a . Array (Parser a) → Parser a
 -===-
 
 ```haskell
-map ∷ ∀ a b . (a → b) → Parser a → Parser b
+map ∷ (a → b) → Parser a → Parser b
 
 ﹇
 > run "0" (map (_ + 1.0) zero)
@@ -380,7 +380,7 @@ value = P.whiteSpace *> jValue <* P.eof
 -===-
 
 ```haskell
-sepBy ∷ ∀ a sep . Parser a → Parser sep → Parser (List a)
+sepBy ∷ Parser a → Parser sep → Parser (List a)
 
 ﹇
 > run "0,1,0,0" (P.sepBy (P.choice [zero, one]) (P.char ','))
@@ -450,11 +450,11 @@ jArray = map JArray
 -===-
 
 ```haskell
-between ∷ ∀ start end a
-  . Parser start
- → Parser end
- → Parser a
- → Parser a
+between 
+  ∷ Parser start
+  → Parser end
+  → Parser a
+  → Parser a
 
 ﹇
 jArray = map JArray (P.between
@@ -464,7 +464,7 @@ jArray = map JArray (P.between
 ⎵
 
 ﹇
-commaSeparated ∷ ∀ a . Char → Char → Parser a → Parser (List a)
+commaSeparated ∷ Char → Char → Parser a → Parser (List a)
 commaSeparated open close p = P.between
   (tokC open)
   (tokC close)
@@ -542,7 +542,7 @@ hexDigit = P.satisfy isHexDigit
 -===-
 
 ```haskell
-replicateA ∷ ∀ a . Int → Parser a → Parser (Array a)
+replicateA ∷ Int → Parser a → Parser (Array a)
 
 ﹇
 > run  "00" (map stringFromCharArray (replicateA 2 (P.char '0')))
@@ -619,7 +619,7 @@ unicode = unicodeHexCode >>= hexCodeToChar
 -===-
 
 ```haskell
-many ∷ ∀ a . Parser a → Parser (Array a )
+many ∷ Parser a → Parser (Array a )
 
 ﹇
 > run "111" (many one)
@@ -765,7 +765,7 @@ jValue = P.choice [jString, (defer \_ → jArray), jBool, jNull]
 -===-
 
 ```haskell
-<|> ∷ ∀ a . Parser a → Parser a → Parser a
+<|> ∷ Parser a → Parser a → Parser a
 ﹇
 P.choice [p1, p2] ⁅== p1 <|> p2⁆
 ⎵
@@ -774,7 +774,7 @@ P.choice [p1, p2, p3] ⁅== p1 <|> p2 <|> p3⁆
 ⎵
 
 ﹇
-lift2 ∷ ∀ a b c . (a → b → c) → Parser a → Parser b → Parser c
+lift2 ∷ (a → b → c) → Parser a → Parser b → Parser c
 ⎵
 
 ﹇
@@ -925,7 +925,7 @@ integer = int 0 <|> fold [ digit1_9, manyDigits ]
 -===-
 
 ```haskell
-some ∷ ∀ a . Parser a → Parser (Array a )
+some ∷ Parser a → Parser (Array a )
 
 ﹇
 someDigits ∷ Parser String
