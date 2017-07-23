@@ -10,10 +10,10 @@ css: './resources/style.css'
 scripts: './resources/scripts.js'
 ---
 
-## Parse You a JSON String using Parsing Combinators!
+### Parse You a JSON String
+### using Parsing Combinators!
 <br>
-<br>
-<br>
+<img src="./resources/json.png" class="noBorder" width="30%"/>
 <br>
 <p style="text-align:right">
 Irakli @Safareli
@@ -450,7 +450,7 @@ jArray = map JArray
 -===-
 
 ```haskell
-between 
+between
   ∷ Parser start
   → Parser end
   → Parser a
@@ -573,6 +573,11 @@ unicodeHexCode = map stringFromCharArray (replicateA 4 hexDigit)
 -===-
 
 ```haskell
+
+(>>=) ∷ m a      → (a → m      b) → m      b
+(>>=) ∷ Parser a → (a → Parser b) → Parser b
+(>>=) ∷ Maybe  a → (a → Maybe  b) → Maybe  b
+
 hexCharsToInt ∷ String → Maybe Int
 hexCharsToInt cs = intFromStringAs hexadecimal cs
 
@@ -794,14 +799,35 @@ bit = P.choice [zero, one]
 ⁅(Right 3.0)⁆
 ⎵
 
+```
+
+-===-
+
+```haskell
+append ∷ a → a → a
+
 ﹇
-fold ∷ Array (Parser String) → Parser String
+append ∷ String → String → String
+append "foo" "bar" == "foobar"
 ⎵
 
 ﹇
-fold [ P.string "foo" , P.string "bar"]
-==
-lift2 append (P.string "foo") (P.string "bar")
+append ∷ Parser String → Parser String → Parser String
+append (P.string "foo") (P.string "bar") == P.string "foobar"
+⎵
+
+﹇
+fold ∷ Array a → a
+⎵
+
+﹇
+fold ∷ Array String → String
+fold [ "foo" , "bar"] = append "foo" "bar"
+⎵
+
+﹇
+fold ∷ Array (Parser String) → Parser String
+fold [ P.string "foo" , P.string "bar"] = append (P.string "foo") (P.string "bar")
 ⎵
 ```
 
@@ -879,8 +905,6 @@ digit = int 0 <|> digit1_9
 -===-
 
 ```haskell
-fold ∷ (Array String) → String
-
 ﹇
 manyDigits ∷ Parser String
 manyDigits = map fold (many digit)
@@ -890,7 +914,11 @@ manyDigits = map fold (many digit)
 > run "000123" manyDigits
 ⁅(Right "000123")⁆
 ⎵
+```
 
+-===-
+
+```haskell
 ﹇
 integer ∷ Parser String
 integer = int 0 <|> fold [ digit1_9, manyDigits ]
