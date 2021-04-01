@@ -1,5 +1,5 @@
 # My talks
-
+- [Property Based Testing](https://github.com/safareli/property-based-testing)
 - [Parse You a JSON String using Parsing Combinators](parse-json/)
 - [Single responsibility principle and CSS](srp-css/)
 - [Write better CSS ](write-better-css/)
