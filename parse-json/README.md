@@ -11,7 +11,8 @@ $ npm run slides
 ---
 
 * [PDF](slides.pdf)
-* video TK
+* ENG video file was lost by organizers :(
+* [GEO video](https://www.youtube.com/watch?v=5z-iwflIgjY&ab_channel=IrakliSafareli), talk was given FP Meetup TBILISI #1
 
 JSON parser related links:
 
