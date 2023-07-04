@@ -1,4 +1,5 @@
-# Write better CSS!
+# Single responsibility principle and CSS
+
 
 In this talk, I will share my experience on how applying **Single responsibility principle** to way we write **CSS** results in highly reusable styles.
 
